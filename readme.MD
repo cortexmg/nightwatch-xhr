@@ -16,6 +16,13 @@ Install
 npm install nightwatch-xhr
 ```
 
+In order for your project to be able to access these commands and assertions you need to include them in your projects nightwatch config.
+```
+...
+"custom_commands_path": "./node_modules/nightwatch-xhr/lib",
+...
+```
+
 Usage Example
 ---
 The function expects these parameters:
