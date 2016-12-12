@@ -1,7 +1,11 @@
-# Nightwatch XHR
+Nightwatch XHR
+===
 
-## Install
+Install
+==
 
-## Usage Example
+Usage Example
+==
 
-## Contribute
+Contribute
+==

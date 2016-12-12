@@ -1,0 +1,25 @@
+{
+  "name": "nightwatch-xhr",
+  "version": "0.1.2",
+  "description": "An XHR \"Listener\" for Nightwatch.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cortexmg/nightwatch-xhr.git"
+  },
+  "keywords": [
+    "ajax",
+    "xhr",
+    "nightwatchjs",
+    "nightwatch"
+  ],
+  "author": "orzilca <orzilca@gmail.com> (https://github.com/orzilca)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cortexmg/nightwatch-xhr/issues"
+  },
+  "homepage": "https://github.com/cortexmg/nightwatch-xhr#readme"
+}
