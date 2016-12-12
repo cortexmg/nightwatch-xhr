@@ -18,6 +18,50 @@ npm install nightwatch-xhr
 
 Usage Example
 ---
+The function expects these parameters:
+* requestUrl - a regex match for url pattern, will only listen to urls matching this, use '' for all urls.
+* Timeout - well, timeout
+* callback - use this to assert the request after it completes
+* trigger - activate a trigger in the browser after initiating the listener
+
+With Trigger:
+```javascript
+module.exports = { 
+    'Load page, wait for XHR': function (browser) {
+        browser
+            .url('some/path')
+            .waitForXHR('', 1000, function assertValues(status, method, url, http_response_code, request_data) {
+                browser.assert.equal(status, "success");
+                browser.assert.equal(method, "POST");
+                browser.assert.equal(http_response_code, "200");
+            })
+    }
+```
+
+With Click Trigger:
+```javascript
+module.exports = { 
+    'Load page, wait for XHR': function (browser) {
+        browser
+            .url('some/path')
+            .waitForXHR('', 1000, function assertValues(status, method, url, http_response_code, request_data) {
+                browser.assert.equal(status, "success");
+                browser.assert.equal(method, "POST");
+                browser.assert.equal(http_response_code, "200");
+            }, function browser_trigger() {
+                 browser.click('.tracking-link-1');
+            });
+    }
+    
+```
+
+
+The callback function returns the following arguments:
+* status (success/error/timeout)
+* method (GET/POST)
+* url (url of request)
+* http_response_code (HTTP status response code, eg: 200)
+* request_data (JSON of request parameters)
 
 Contribute
 ---
