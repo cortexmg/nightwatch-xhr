@@ -31,10 +31,10 @@ The function expects these parameters:
 * callback - use this to assert the request after it completes
 * trigger - activate a trigger in the browser after initiating the listener
 
-With Trigger:
+Without Trigger:
 ```javascript
 module.exports = { 
-    'Load page, wait for XHR': function (browser) {
+    'Catch all XHRs': function (browser) {
         browser
             .url('some/path')
             .waitForXHR('', 1000, function assertValues(status, method, url, http_response_code, request_data) {
@@ -43,23 +43,39 @@ module.exports = {
                 browser.assert.equal(http_response_code, "200");
             })
     }
+ }
 ```
 
 With Click Trigger:
 ```javascript
 module.exports = { 
-    'Load page, wait for XHR': function (browser) {
+    'Catch all XHRs, trigger click': function (browser) {
         browser
             .url('some/path')
             .waitForXHR('', 1000, function assertValues(status, method, url, http_response_code, request_data) {
                 browser.assert.equal(status, "success");
                 browser.assert.equal(method, "POST");
                 browser.assert.equal(http_response_code, "200");
-            }, function browser_trigger() {
+            }, function browserTrigger() {
                  browser.click('.tracking-link-1');
             });
     }
-    
+}
+```
+
+"Listening" to a specific URL or Regex
+```javascript
+module.exports = {
+    'Catch user update request: function() {
+        browser
+            .waitForXHR('user\/([0-9]*)\/details', 1000, function assertValues(status) {
+                browser.assert.equal(status, "success");
+                browser.assert.equal(method, "PUT");
+            }, function browserTrigger() {
+                browser.click('.update'); 
+            });
+    }
+}
 ```
 
 
