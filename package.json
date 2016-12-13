@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-xhr",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "An XHR \"Listener\" for Nightwatch.js",
   "main": "index.js",
   "scripts": {
