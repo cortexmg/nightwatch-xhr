@@ -66,7 +66,7 @@ module.exports = {
 "Listening" to a specific URL or Regex
 ```javascript
 module.exports = {
-    'Catch user update request: function() {
+    'Catch user update request': function() {
         browser
             .waitForXHR('user\/([0-9]*)\/details', 1000, function assertValues(status) {
                 browser.assert.equal(status, "success");
