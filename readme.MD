@@ -33,7 +33,7 @@ The function expects these parameters:
 
 Without Trigger:
 ```javascript
-module.exports = { 
+module.exports = {
     'Catch all XHRs': function (browser) {
         browser
             .url('some/path')
@@ -48,7 +48,7 @@ module.exports = {
 
 With Click Trigger:
 ```javascript
-module.exports = { 
+module.exports = {
     'Catch all XHRs, trigger click': function (browser) {
         browser
             .url('some/path')
@@ -72,7 +72,7 @@ module.exports = {
                 browser.assert.equal(status, "success");
                 browser.assert.equal(method, "PUT");
             }, function browserTrigger() {
-                browser.click('.update'); 
+                browser.click('.update');
             });
     }
 }
@@ -85,6 +85,8 @@ The callback function returns the following arguments:
 * url (url of request)
 * http_response_code (HTTP status response code, eg: 200)
 * request_data (JSON of request parameters)
+
+When the anticipated XHR request has not occurred, the above arguments will be undefined. So, please handle them appropriately.
 
 Contribute
 ---
