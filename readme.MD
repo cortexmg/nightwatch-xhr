@@ -25,8 +25,17 @@ yarn add nightwatch-xhr
 In order for your project to be able to access these commands and assertions you need to include them in your projects nightwatch config.
 ```
 ...
-"custom_commands_path": ["./node_modules/nightwatch-xhr/lib"],
+"custom_commands_path": ["./node_modules/nightwatch-xhr/src/commands"],
 "custom_assertions_path: ["./node_modules/nightwatch-xhr/src/assertions"],
+...
+```
+
+or, for legacy javascript, use
+
+```
+...
+"custom_commands_path": ["./node_modules/nightwatch-xhr/es5/commands"],
+"custom_assertions_path: ["./node_modules/nightwatch-xhr/es5/assertions"],
 ...
 ```
 
