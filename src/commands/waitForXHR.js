@@ -1,3 +1,16 @@
+// @flow
+
+opaque type URL = string;
+
+type ListenedXHR = {|
+    url: URL,
+    httpResponseCode: number,
+    responseData: string,
+    status: 'success' | 'error',
+    requestData?: {},
+|};
+type Callback = (ListenedXHR => void);
+
 const util = require('util');
 const events = require('events');
 
@@ -6,6 +19,7 @@ import { clientListen, clientPoll } from '../client';
 const identity = x => x;
 
 function WaitForXHR() {
+    // $FlowFixMe
     events.EventEmitter.call(this);
 }
 
@@ -30,9 +44,14 @@ WaitForXHR.prototype.poll = function () {
     });
 };
 
-WaitForXHR.prototype.command = function (urlPattern = '', timeout, trigger = identity, callback = identity) {
+WaitForXHR.prototype.command = function (
+    urlPattern:string = '',
+    timeout: number,
+    trigger:(() => void) = () => {},
+    callback:Callback = () => {}
+) {
     const command = this;
-    const {api} = this;
+    const { api } = this;
     this.callback = callback;
 
     this.xhrListenId = 'xhrListen_' + (new Date()).getTime();
