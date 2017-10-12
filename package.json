@@ -32,7 +32,7 @@
       "js"
     ],
     "transform": {
-      "\\\\.+\\.js$": "babel-jest"
+      "^.+\\.js$": "babel-jest"
     }
   },
   "devDependencies": {
