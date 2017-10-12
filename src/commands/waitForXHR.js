@@ -35,7 +35,7 @@ WaitForXHR.prototype.poll = function () {
     this.api.execute(clientPoll, [command.xhrListenId], function (result) {
         if (result && result.value && result.value.status) {
             // console.warn(`Got ${result.value.status} response for id ${command.xhrListenId}`);
-            command.callback(command.api, result.value);
+            command.callback(result.value);
             clearInterval(command.pollingInterval);
             clearTimeout(command.timeout);
             command.emit('complete');
@@ -90,7 +90,7 @@ WaitForXHR.prototype.command = function (
     // console.log('Handling trigger ...');
     if (trigger) {
         if (typeof trigger === "function")
-            trigger(this.client.api);
+            trigger();
         else if (typeof trigger === "string")
             api.click(trigger);
     }
