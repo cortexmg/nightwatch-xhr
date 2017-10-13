@@ -1,30 +1,42 @@
-export const clientListen = function (clientUrlPattern, clientListenId) {
-    XMLHttpRequest.lastListenId = clientListenId;
+export const clientListen = function () {
+    const getXhr = id => window.xhrListen.find(xhr => xhr.id === id);
+    const rand = () => Math.random() * 16 | 0;
+    const uuidV4 = () =>
+        'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
+            .replace(/[xy]/g, c => (
+                (c === 'x'
+                        ? rand()
+                        : rand() & 0x3 | 0x8
+                ).toString(16)
+            ));
+
+    window.xhrListen = [];
+
     if (!XMLHttpRequest.customized) {
         XMLHttpRequest.realSend = XMLHttpRequest.prototype.send;
         XMLHttpRequest.realOpen = XMLHttpRequest.prototype.open;
+
         XMLHttpRequest.prototype.open = function (method, url) {
-            if (url.match(clientUrlPattern)) {
-                this.listen = { method, url, clientListenId: XMLHttpRequest.lastListenId };
-                this.onload = function () {
-                    if (this.readyState === XMLHttpRequest.DONE) {
-                        this.listen.httpResponseCode = this.status;
-                        this.listen.responseData = this.responseText;
-                        if (this.status === 200) {
-                            this.listen.status = "success";
-                        } else {
-                            this.listen.status = "error";
-                        }
-                        window[XMLHttpRequest.lastListenId] = this.listen;
-                    }
-                };
-            }
+            this.id = uuidV4();
+            window.xhrListen.push({
+                id: this.id,
+                method,
+                url,
+                openedTime: Date.now(),
+            });
+            this.onload = function () {
+                if (this.readyState === XMLHttpRequest.DONE) {
+                    const xhr = getXhr(this.id);
+                    xhr.httpResponseCode = this.status;
+                    xhr.responseData = this.responseText;
+                    xhr.status = (this.status === 200 ? 'success' : 'error');
+                }
+            };
             XMLHttpRequest.realOpen.apply(this, arguments);
         };
         XMLHttpRequest.prototype.send = function (data) {
-            if (this.listen)
-                this.listen.requestData = data;
-            else this.listen = { requestData: data};
+            const xhr = getXhr(this.id);
+            xhr.requestData = data;
 
             XMLHttpRequest.realSend.apply(this, arguments);
         };
@@ -32,9 +44,6 @@ export const clientListen = function (clientUrlPattern, clientListenId) {
     }
 };
 
-export const clientPoll = function (clientListenId) {
-    if (window[clientListenId])
-        return window[clientListenId];
-    return null;
+export const clientPoll = function () {
+    return window.xhrListen;
 };
-

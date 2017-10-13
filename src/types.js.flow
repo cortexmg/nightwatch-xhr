@@ -1,0 +1,26 @@
+// @flow
+
+export type URL = string;
+export opaque type UUID = string;
+export opaque type milliseconds = number;
+export opaque type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'HEAD' | 'CONNECT' | 'PATCH' | 'DELETE' | 'OPTIONS' | 'TRACE';
+
+export type ListenedXHR = {|
+   id: UUID,
+   openedTime: milliseconds,
+   method: HTTPMethod,
+   url: URL,
+   status: 'success' | 'error',
+   httpResponseCode?: number,
+   responseData?: string,
+   requestData?: string,
+|};
+
+export type Callback = (ListenedXHR => void);
+export type Trigger = string | () => void;
+
+export type Options = {|
+   timeout: number,
+   trigger: Trigger,
+   callback: Callback,
+|};

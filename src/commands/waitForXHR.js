@@ -1,22 +1,11 @@
 // @flow
 
-opaque type URL = string;
-
-type ListenedXHR = {|
-    url: URL,
-    httpResponseCode: number,
-    responseData: string,
-    status: 'success' | 'error',
-    requestData?: {},
-|};
-type Callback = (ListenedXHR => void);
+import type {Callback, ListenedXHR, Options, Trigger} from "../types";
 
 const util = require('util');
 const events = require('events');
 
 import { clientListen, clientPoll } from '../client';
-
-const identity = x => x;
 
 function WaitForXHR() {
     // $FlowFixMe
@@ -25,38 +14,16 @@ function WaitForXHR() {
 
 util.inherits(WaitForXHR, events.EventEmitter);
 
-WaitForXHR.prototype.reschedulePolling = function() {
-    const command = this;
-    this.pollingInterval = setTimeout(() => command.poll.call(command), 100);
-};
-
-WaitForXHR.prototype.poll = function () {
-    const command = this;
-    this.api.execute(clientPoll, [command.xhrListenId], function (result) {
-        if (result && result.value && result.value.status) {
-            // console.warn(`Got ${result.value.status} response for id ${command.xhrListenId}`);
-            command.callback(result.value);
-            clearInterval(command.pollingInterval);
-            clearTimeout(command.timeout);
-            command.emit('complete');
-        } else
-            command.reschedulePolling.call(command);
-    });
-};
-
 WaitForXHR.prototype.command = function (
     urlPattern:string = '',
-    timeout: number,
-    trigger:(() => void) = () => {},
-    callback:Callback = () => {}
+    delay: number = 1000,
+    trigger: Trigger = () => {},
+    callback: Callback = () => {},
 ) {
     const command = this;
     const { api } = this;
     this.callback = callback;
-
-    this.xhrListenId = 'xhrListen_' + (new Date()).getTime();
-
-    // console.log('pattern', urlPattern);
+    this.urlPattern = urlPattern;
 
     // console.log('Verifying request ...');
     if (typeof urlPattern === 'string') {
@@ -70,22 +37,22 @@ WaitForXHR.prototype.command = function (
     }
 
     // console.log('Setting up listening...');
-    api.execute(clientListen, [urlPattern, this.xhrListenId], function (res) {
+    api.execute(clientListen, [], function (res) {
         // console.warn('Listening XHR requests');
     });
 
-    // console.log('Setting up polling interval ...');
-    this.reschedulePolling();
-
     // console.log('Setting up timeout...');
     this.timeout = setTimeout(function () {
-        console.log(util.format('[WaitForXHR TimeOut] %s ms, no XHR request for pattern : "%s"', timeout, urlPattern));
-        clearInterval(command.pollingInterval);
-        // callback(command.client.api, new Error());
-        // his.fail({value:false}, 'not found', this.expectedValue, defaultMsg);
-        command.client.assertion(false, 'Timed out', 'XHR Request', `Timed out waiting for ${urlPattern} XHR !`);
-        command.emit('complete');
-    }, timeout);
+        command.api.execute(clientPoll, [], function ({ value:xhrs }: { value: ?Array<ListenedXHR> }) {
+            //console.log('xhrss', xhrs);
+            const matchingXhrs = xhrs ? xhrs.filter(xhr => xhr.url.match(command.urlPattern)) : [];
+            if (matchingXhrs)
+                command.callback(matchingXhrs);
+            else
+                command.client.assertion(false, 'Nothing heard', 'XHR Request', `No XHR opened with pattern ${urlPattern} !`);
+            command.emit('complete');
+        });
+    }, delay);
 
     // console.log('Handling trigger ...');
     if (trigger) {
