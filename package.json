@@ -4,7 +4,12 @@
   "description": "An XHR \"Listener\" for Nightwatch.js",
   "main": "lib/waitForXHR.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir es5 --copy-files --delete-dir-on-start",
+    "build:watch": "babel src --out-dir es5 --copy-files --delete-dir-on-start --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watch:verbose": "jest --watch --verbose",
+    "coverage": "jest --coverage --verbose"
   },
   "repository": {
     "type": "git",
@@ -21,5 +26,25 @@
   "bugs": {
     "url": "https://github.com/cortexmg/nightwatch-xhr/issues"
   },
-  "homepage": "https://github.com/cortexmg/nightwatch-xhr#readme"
+  "homepage": "https://github.com/cortexmg/nightwatch-xhr#readme",
+  "jest": {
+    "testRegex": "test/([^/]+/?){2}\\.js$",
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    }
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "6",
+    "babel-jest": "^21.2.0",
+    "babel-plugin-dynamic-import-node": "^1.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-flow": "^6.23.0",
+    "flow-bin": "^0.56.0",
+    "jest": "^21.2.1"
+  }
 }

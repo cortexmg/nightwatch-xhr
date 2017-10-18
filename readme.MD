@@ -12,24 +12,40 @@ Have fun!
 
 Install
 ---
-```javascript
+```shell
 npm install nightwatch-xhr
+```
+
+or 
+
+```shell
+yarn add nightwatch-xhr
 ```
 
 In order for your project to be able to access these commands and assertions you need to include them in your projects nightwatch config.
 ```
 ...
-"custom_commands_path": "./node_modules/nightwatch-xhr/lib",
+"custom_commands_path": ["./node_modules/nightwatch-xhr/src/commands"],
+"custom_assertions_path: ["./node_modules/nightwatch-xhr/src/assertions"],
+...
+```
+
+or, for legacy javascript, use
+
+```
+...
+"custom_commands_path": ["./node_modules/nightwatch-xhr/es5/commands"],
+"custom_assertions_path: ["./node_modules/nightwatch-xhr/es5/assertions"],
 ...
 ```
 
 Usage Example
 ---
 The function expects these parameters:
-* requestUrl - a regex match for url pattern, will only listen to urls matching this, use '' for all urls.
-* Timeout - well, timeout
-* callback - use this to assert the request after it completes
+* urlPattern - a regex match for url pattern, will only listen to urls matching this, use '' for all urls.
+* timeout - well, timeout
 * trigger - activate a trigger in the browser after initiating the listener
+* callback - use this to assert the request after it completes
 
 Without Trigger:
 ```javascript
@@ -37,10 +53,12 @@ module.exports = {
     'Catch all XHRs': function (browser) {
         browser
             .url('some/path')
-            .waitForXHR('', 1000, function assertValues(status, method, url, http_response_code, request_data) {
-                browser.assert.equal(status, "success");
-                browser.assert.equal(method, "POST");
-                browser.assert.equal(http_response_code, "200");
+            .waitForXHR('', 1000, null, function assertValues(xhr) {
+                browser.assert.equal(xhr.status, "success");
+                browser.assert.equal(xhr.method, "POST");
+                browser.assert.equal(xhr.requestData, "200");
+                browser.assert.equal(xhr.httpResponseCode, "200");
+                browser.assert.equal(xhr.responseData, "");
             })
     }
  }
@@ -52,12 +70,14 @@ module.exports = {
     'Catch all XHRs, trigger click': function (browser) {
         browser
             .url('some/path')
-            .waitForXHR('', 1000, function assertValues(status, method, url, http_response_code, request_data) {
-                browser.assert.equal(status, "success");
-                browser.assert.equal(method, "POST");
-                browser.assert.equal(http_response_code, "200");
-            }, function browserTrigger() {
-                 browser.click('.tracking-link-1');
+            .waitForXHR('', 1000, function browserTrigger() {
+                browser.click('.tracking-link-1');
+            }, function assertValues(xhr) {
+                browser.assert.equal(xhr.status, "success");
+                browser.assert.equal(xhr.method, "POST");
+                browser.assert.equal(xhr.requestData, "200");
+                browser.assert.equal(xhr.httpResponseCode, "200");
+                browser.assert.equal(xhr.responseData, "");
             });
     }
 }
@@ -68,25 +88,35 @@ module.exports = {
 module.exports = {
     'Catch user update request': function() {
         browser
-            .waitForXHR('user\/([0-9]*)\/details', 1000, function assertValues(status) {
-                browser.assert.equal(status, "success");
-                browser.assert.equal(method, "PUT");
-            }, function browserTrigger() {
-                browser.click('.update');
-            });
+            .url('some/path')
+            .waitForXHR(
+                'user\/([0-9]*)\/details',
+                1000,
+                function browserTrigger() {
+                    browser.click('.update');
+                },
+                function assertValues(xhr) {
+                    browser.assert.equal(xhr.status, "success");
+                    browser.assert.equal(xhr.method, "POST");
+                    browser.assert.equal(xhr.requestData, "200");
+                    browser.assert.equal(xhr.httpResponseCode, "200");
+                    browser.assert.equal(xhr.responseData, "");
+                }
+            );
     }
 }
 ```
 
 
-The callback function returns the following arguments:
+The callback function returns an object containing the following properties :
 * status (success/error/timeout)
 * method (GET/POST)
 * url (url of request)
-* http_response_code (HTTP status response code, eg: 200)
-* request_data (JSON of request parameters)
+* requestData (raw POSTed data)
+* httpResponseCode (HTTP status response code in string, eg: "200", )
+* responseData (raw response data)
 
-When the anticipated XHR request has not occurred, the above arguments will be undefined. So, please handle them appropriately.
+When the anticipated XHR request has not occurred, it fails an assertion. Callback is not called. 
 
 Contribute
 ---
