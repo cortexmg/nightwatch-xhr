@@ -30,7 +30,7 @@ In order for your project to be able to access these commands and assertions you
 ...
 ```
 
-or, for legacy javascript, use
+or, for legacy (ES5) Javascript, use
 
 ```
 ...
@@ -39,21 +39,34 @@ or, for legacy javascript, use
 ...
 ```
 
-Usage Example
----
+## Commands 
+
+### waitForXHR
+Calls the `trigger`, waits for a `delay` to complete, and then calls `callback` with an an array of all xhr requests corresponding to the given `urlPattern`. 
+
+### waitForFirstXHR
+Calls the `trigger`, and then calls `callback` with the first xhr request corresponding to the given `urlPattern`, failing if `timeout` is exceeded.  
+
+### listenXHR
+Only set up listening. If it has already been called, it resets the requests list.
+
+### getXHR
+Calls the `callback` with all requests corresponding to the given `urlPattern`   
+
+## Usage Examples
 The function expects these parameters:
 * urlPattern - a regex match for url pattern, will only listen to urls matching this, use '' for all urls.
 * timeout - well, timeout
 * trigger - activate a trigger in the browser after initiating the listener
 * callback - use this to assert the request after it completes
 
-Without Trigger:
+### waitForFirstXHR Without Trigger:
 ```javascript
 module.exports = {
     'Catch all XHRs': function (browser) {
         browser
             .url('some/path')
-            .waitForXHR('', 1000, null, function assertValues(xhr) {
+            .waitForFirstXHR('', 1000, null, function assertValues(xhr) {
                 browser.assert.equal(xhr.status, "success");
                 browser.assert.equal(xhr.method, "POST");
                 browser.assert.equal(xhr.requestData, "200");
@@ -64,7 +77,7 @@ module.exports = {
  }
 ```
 
-With Click Trigger:
+### waitForXHR With Click Trigger:
 ```javascript
 module.exports = {
     'Catch all XHRs, trigger click': function (browser) {
@@ -72,24 +85,24 @@ module.exports = {
             .url('some/path')
             .waitForXHR('', 1000, function browserTrigger() {
                 browser.click('.tracking-link-1');
-            }, function assertValues(xhr) {
-                browser.assert.equal(xhr.status, "success");
-                browser.assert.equal(xhr.method, "POST");
-                browser.assert.equal(xhr.requestData, "200");
-                browser.assert.equal(xhr.httpResponseCode, "200");
-                browser.assert.equal(xhr.responseData, "");
+            }, function assertValues(xhrs) {
+                browser.assert.equal(xhrs[0].status, "success");
+                browser.assert.equal(xhrs[0].method, "POST");
+                browser.assert.equal(xhrs[0].requestData, "200");
+                browser.assert.equal(xhrs[0].httpResponseCode, "200");
+                browser.assert.equal(xhrs[0].responseData, "");
             });
     }
 }
 ```
 
-"Listening" to a specific URL or Regex
+### "Listening" to a specific URL or Regex
 ```javascript
 module.exports = {
-    'Catch user update request': function() {
+    'Catch user update request': function(browser) {
         browser
             .url('some/path')
-            .waitForXHR(
+            .waitForFirstXHR(
                 'user\/([0-9]*)\/details',
                 1000,
                 function browserTrigger() {
@@ -107,7 +120,6 @@ module.exports = {
 }
 ```
 
-
 The callback function returns an object containing the following properties :
 * status (success/error/timeout)
 * method (GET/POST)
@@ -116,7 +128,23 @@ The callback function returns an object containing the following properties :
 * httpResponseCode (HTTP status response code in string, eg: "200", )
 * responseData (raw response data)
 
-When the anticipated XHR request has not occurred, it fails an assertion. Callback is not called. 
+When the anticipated XHR request has not occurred, it fails an assertion. Callback is not called.
+
+### With listenXHR / getXHR
+
+```javascript
+module.exports = {
+    'Listens and the Gets': function(browser) {
+      browser.url('some/path')
+      .listenXHR()
+      .doStuff()
+      .doOtherStuff()
+      .getXHR('some/pattern', xhrs => {
+          browser.asset.equal(xhrs.find(x => x.method==='POST').status, 200);
+      });
+    }
+}
+```
 
 Contribute
 ---
