@@ -13,22 +13,47 @@ function GetXHR() {
 
 util.inherits(GetXHR, events.EventEmitter);
 
-GetXHR.prototype.command = function (urlPattern:string = '', callback:Callback) {
+GetXHR.prototype.reschedulePolling = function() {
     const command = this;
-    this.api.execute(clientPoll, [], function ({value: xhrs}: { value: ?Array<ListenedXHR> }) {
+    this.pollingInterval = setTimeout(() => command.poll.call(command), 100);
+};
+
+GetXHR.prototype.poll = function () {
+    const command = this;
+    this.api.execute(clientPoll, [], function ({ value:xhrs }: { value: ?Array<ListenedXHR> }) {
         if (xhrs && xhrs.length) {
-            const filtered = xhrs.filter(
-                xhr => xhr.url.match(urlPattern)
-            );
+            const filtered = xhrs.filter(xhr => xhr.url.match(command.urlPattern));
             if (filtered && filtered.length) {
-                // console.warn(`Got ${xhrs.length} request(s) for urlPattern ${urlPattern}`);
-                callback(filtered);
+                command.callback(filtered);
+                clearInterval(command.pollingInterval);
+                clearTimeout(command.timeout);
                 command.emit('complete');
-                return;
+                return true;
             }
         }
-        callback([]);
+
+        command.reschedulePolling.call(command);
+        return false;
     });
+};
+
+GetXHR.prototype.command = function (urlPattern:string = '', delay:?number, callback:Callback) {
+    this.callback = callback;
+    this.urlPattern = urlPattern;
+    const command = this;
+
+    if (delay) {
+        this.reschedulePolling();
+
+        this.timeout = setTimeout(function () {
+            clearInterval(command.pollingInterval);
+            command.client.assertion(false, 'Timed out', 'XHR Request', `Timed out waiting for ${urlPattern} XHR !`);
+            command.emit('complete');
+        }, delay);
+    } else {
+        if (!this.poll())
+            callback([]);
+    }
 };
 
 module.exports = GetXHR;

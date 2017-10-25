@@ -51,7 +51,7 @@ Calls the `trigger`, and then calls `callback` with the first xhr request corres
 Only set up listening. If it has already been called, it resets the requests list.
 
 ### getXHR
-Calls the `callback` with all requests corresponding to the given `urlPattern`   
+Calls the `callback` with all requests corresponding to the given `urlPattern`. If given `delay` waits that time before failing. 
 
 ## Usage Examples
 The function expects these parameters:
@@ -140,6 +140,22 @@ module.exports = {
       .doStuff()
       .doOtherStuff()
       .getXHR('some/pattern', xhrs => {
+          browser.asset.equal(xhrs.find(x => x.method==='POST').status, 200);
+      });
+    }
+}
+```
+
+### With listenXHR / getXHR and some delay
+
+```javascript
+module.exports = {
+    'Listens and the Gets': function(browser) {
+      browser.url('some/path')
+      .listenXHR()
+      .doStuff()
+      .doOtherStuff()
+      .getXHR('some/pattern', 1000, xhrs => {
           browser.asset.equal(xhrs.find(x => x.method==='POST').status, 200);
       });
     }
