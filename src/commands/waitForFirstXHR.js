@@ -24,8 +24,8 @@ WaitForXHR.prototype.poll = function () {
         if (xhrs && xhrs.length) {
             const filtered = xhrs.filter(xhr => xhr.url.match(command.urlPattern));
             if (filtered && filtered.length && filtered[0].status) {
-                console.warn(`Got ${xhrs[0].status} response for id ${command.xhrListenId}`);
-                command.callback(xhrs[0]);
+                console.warn(`Got ${filtered[0].status} response for id ${command.xhrListenId}`);
+                command.callback(filtered[0]);
                 clearInterval(command.pollingInterval);
                 clearTimeout(command.timeout);
                 command.emit('complete');
