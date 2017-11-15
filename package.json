@@ -6,8 +6,7 @@
   "scripts": {
     "install": "npm run-script build",
     "build": "babel src --out-dir es5 --copy-files --delete-dir-on-start",
-    "build:watch":
-      "babel src --out-dir es5 --copy-files --delete-dir-on-start --watch",
+    "build:watch": "babel src --out-dir es5 --copy-files --delete-dir-on-start --watch",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:watch:verbose": "jest --watch --verbose",
@@ -17,7 +16,12 @@
     "type": "git",
     "url": "git+https://github.com/cortexmg/nightwatch-xhr.git"
   },
-  "keywords": ["ajax", "xhr", "nightwatchjs", "nightwatch"],
+  "keywords": [
+    "ajax",
+    "xhr",
+    "nightwatchjs",
+    "nightwatch"
+  ],
   "author": "orzilca <orzilca@gmail.com> (https://github.com/orzilca)",
   "license": "MIT",
   "bugs": {
@@ -26,7 +30,9 @@
   "homepage": "https://github.com/cortexmg/nightwatch-xhr#readme",
   "jest": {
     "testRegex": "test/([^/]+/?){2}\\.js$",
-    "moduleFileExtensions": ["js"],
+    "moduleFileExtensions": [
+      "js"
+    ],
     "transform": {
       "^.+\\.js$": "babel-jest"
     }
