@@ -16,7 +16,7 @@ export type ListenedXHR = {|
    requestData?: string,
 |};
 
-export type Callback = (ListenedXHR => void);
+export type Callback = (Array<ListenedXHR> => void);
 export type Trigger = string | () => void;
 
 export type Options = {|

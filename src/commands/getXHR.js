@@ -13,27 +13,13 @@ function GetXHR() {
 
 util.inherits(GetXHR, events.EventEmitter);
 
-GetXHR.prototype.reschedulePolling = function() {
-    const command = this;
-    this.pollingInterval = setTimeout(() => command.poll.call(command), 100);
-};
-
 GetXHR.prototype.poll = function () {
     const command = this;
     this.api.execute(clientPoll, [], function ({ value:xhrs }: { value: ?Array<ListenedXHR> }) {
-        if (xhrs && xhrs.length) {
-            const filtered = xhrs.filter(xhr => xhr.url.match(command.urlPattern));
-            if (filtered && filtered.length) {
-                command.callback(filtered);
-                clearInterval(command.pollingInterval);
-                clearTimeout(command.timeout);
-                command.emit('complete');
-                return true;
-            }
-        }
-
-        command.reschedulePolling.call(command);
-        return false;
+        command.callback(xhrs.filter(xhr => xhr.url.match(command.urlPattern)));
+        clearInterval(command.pollingInterval);
+        clearTimeout(command.timeout);
+        command.emit('complete');
     });
 };
 
@@ -43,16 +29,9 @@ GetXHR.prototype.command = function (urlPattern:string = '', delay:?number, call
     const command = this;
 
     if (delay) {
-        this.reschedulePolling();
-
-        this.timeout = setTimeout(function () {
-            clearInterval(command.pollingInterval);
-            command.client.assertion(false, 'Timed out', 'XHR Request', `Timed out waiting for ${urlPattern} XHR !`);
-            command.emit('complete');
-        }, delay);
+        setTimeout(() => command.poll.apply(this), delay);
     } else {
-        if (!this.poll())
-            callback([]);
+        this.poll();
     }
 };
 
