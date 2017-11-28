@@ -1,9 +1,10 @@
 {
   "name": "nightwatch-xhr",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "description": "An XHR \"Listener\" for Nightwatch.js",
   "main": "lib/waitForXHR.js",
   "scripts": {
+    "install": "npm run-script build",
     "build": "babel src --out-dir es5 --copy-files --delete-dir-on-start",
     "build:watch": "babel src --out-dir es5 --copy-files --delete-dir-on-start --watch",
     "test": "jest",
@@ -36,15 +37,17 @@
       "^.+\\.js$": "babel-jest"
     }
   },
-  "devDependencies": {
+  "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "6",
-    "babel-jest": "^21.2.0",
-    "babel-plugin-dynamic-import-node": "^1.1.0",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
-    "flow-bin": "^0.56.0",
+    "babel-plugin-dynamic-import-node": "^1.1.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "flow-bin": "^0.56.0"
+  },
+  "devDependencies": {
+    "babel-jest": "^21.2.0",
     "jest": "^21.2.1"
   }
 }

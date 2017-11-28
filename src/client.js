@@ -27,16 +27,19 @@ export const clientListen = function () {
             this.onload = function () {
                 if (this.readyState === XMLHttpRequest.DONE) {
                     const xhr = getXhr(this.id);
-                    xhr.httpResponseCode = this.status;
-                    xhr.responseData = this.responseText;
-                    xhr.status = (this.status === 200 ? 'success' : 'error');
+                    if (xhr) {
+                        xhr.httpResponseCode = this.status;
+                        xhr.responseData = this.responseText;
+                        xhr.status = (this.status === 200 ? 'success' : 'error');
+                    }
                 }
             };
             XMLHttpRequest.realOpen.apply(this, arguments);
         };
         XMLHttpRequest.prototype.send = function (data) {
             const xhr = getXhr(this.id);
-            xhr.requestData = data;
+            if (xhr)
+                xhr.requestData = data;
 
             XMLHttpRequest.realSend.apply(this, arguments);
         };
