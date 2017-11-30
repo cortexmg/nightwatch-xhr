@@ -48,5 +48,5 @@ export const clientListen = function () {
 };
 
 export const clientPoll = function () {
-    return window.xhrListen;
+    return window.xhrListen || [];
 };
