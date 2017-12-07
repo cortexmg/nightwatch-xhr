@@ -134,9 +134,9 @@ describe('client', () => {
             expect(result[0].url).toEqual('some/url');
             expect(result[0].httpResponseCode).toEqual(200);
         });
-        it('retreives null if xhr as been intercepted', () => {
+        it('retreives empty array if no xhr has been intercepted', () => {
             const result = clientPoll();
-            expect(clientPoll()).toBeUndefined();
+            expect(clientPoll()).toEqual([]);
         });
     })
 });
