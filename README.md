@@ -1,5 +1,5 @@
 Nightwatch XHR
-[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 ===
 
 We've encountered some issues with our e2e tests.
@@ -173,6 +173,8 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
+| [<img src="https://avatars2.githubusercontent.com/u/1014282?v=4" width="100px;"/><br /><sub><b>Or Zilca</b></sub>](http://www.smarteq.co.il)<br />[💻](https://github.com/cortexmg/nightwatch-xhr/commits?author=orzilca "Code") [📖](https://github.com/cortexmg/nightwatch-xhr/commits?author=orzilca "Documentation") [💡](#example-orzilca "Examples") [👀](#review-orzilca "Reviewed Pull Requests") |
+| :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

@@ -6,5 +6,18 @@
   ],
   "imageSize": 100,
   "commit": true,
-  "contributors": []
+  "contributors": [
+    {
+      "login": "orzilca",
+      "name": "Or Zilca",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1014282?v=4",
+      "profile": "http://www.smarteq.co.il",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "review"
+      ]
+    }
+  ]
 }
