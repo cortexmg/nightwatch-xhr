@@ -9,7 +9,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:watch:verbose": "jest --watch --verbose",
-    "coverage": "jest --coverage --verbose"
+    "coverage": "jest --coverage --verbose",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   },
   "repository": {
     "type": "git",
@@ -37,6 +39,7 @@
     }
   },
   "devDependencies": {
+    "all-contributors-cli": "^4.10.1",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.0.1",
