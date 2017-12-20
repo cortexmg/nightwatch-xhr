@@ -1,0 +1,85 @@
+{
+  "projectName": "nightwatch-xhr",
+  "projectOwner": "cortexmg",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "orzilca",
+      "name": "Or Zilca",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1014282?v=4",
+      "profile": "http://www.smarteq.co.il",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "review"
+      ]
+    },
+    {
+      "login": "jalil",
+      "name": "Jalil Arfaoui",
+      "avatar_url": "https://framagit.org/uploads/-/system/user/avatar/8497/avatar.png",
+      "profile": "https://framagit.org/jalil/",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "review",
+        "test",
+        "tool"
+      ]
+    },
+    {
+      "login": "louis-bompart",
+      "name": "Louis Bompart",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12366410?v=4",
+      "profile": "https://github.com/louis-bompart",
+      "contributions": [
+        "bug",
+        "tool"
+      ]
+    },
+    {
+      "login": "rdbmax",
+      "name": "Maxime Boudier",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8048092?v=4",
+      "profile": "https://github.com/rdbmax",
+      "contributions": [
+        "tool",
+        "test"
+      ]
+    },
+    {
+      "login": "",
+      "name": "Leonardo Kewitz",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2119706?v=4",
+      "profile": "https://kewitz.js.org",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "",
+      "name": "Sergey Titievsky",
+      "avatar_url": "",
+      "profile": "",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "",
+      "name": "Veetil",
+      "avatar_url": "",
+      "profile": "",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    }
+  ]
+}
