@@ -1,0 +1,10 @@
+{
+  "projectName": "nightwatch-xhr",
+  "projectOwner": "cortexmg",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": []
+}
