@@ -1,5 +1,5 @@
 Nightwatch XHR
-[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors)
 ===
 
 We've encountered some issues with our e2e tests.
@@ -163,18 +163,14 @@ module.exports = {
 }
 ```
 
-Contribute
----
-Feel free to correct/improve the code and send in a pull request!
-
 ## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/1014282?v=4" width="100px;"/><br /><sub><b>Or Zilca</b></sub>](http://www.smarteq.co.il)<br />[💻](https://github.com/cortexmg/nightwatch-xhr/commits?author=orzilca "Code") [📖](https://github.com/cortexmg/nightwatch-xhr/commits?author=orzilca "Documentation") [💡](#example-orzilca "Examples") [👀](#review-orzilca "Reviewed Pull Requests") | [<img src="https://avatars2.githubusercontent.com/u/45453?v=4" width="100px;"/><br /><sub><b>jalil</b></sub>](https://github.com/jalil)<br />[💻](https://github.com/cortexmg/nightwatch-xhr/commits?author=jalil "Code") [📖](https://github.com/cortexmg/nightwatch-xhr/commits?author=jalil "Documentation") [💡](#example-jalil "Examples") [👀](#review-jalil "Reviewed Pull Requests") [⚠️](https://github.com/cortexmg/nightwatch-xhr/commits?author=jalil "Tests") [🔧](#tool-jalil "Tools") | [<img src="https://avatars2.githubusercontent.com/u/12366410?v=4" width="100px;"/><br /><sub><b>Pixel</b></sub>](https://github.com/louis-bompart)<br />[🔧](#tool-louis-bompart "Tools") | [<img src="https://avatars3.githubusercontent.com/u/8048092?v=4" width="100px;"/><br /><sub><b>rdbmax</b></sub>](https://github.com/rdbmax)<br />[🔧](#tool-rdbmax "Tools") [⚠️](https://github.com/cortexmg/nightwatch-xhr/commits?author=rdbmax "Tests") |
-| :---: | :---: | :---: | :---: |
+| [<img src="https://avatars2.githubusercontent.com/u/1014282?v=4" width="100px;"/><br /><sub><b>Or Zilca</b></sub>](http://www.smarteq.co.il)<br />[💻](https://github.com/cortexmg/nightwatch-xhr/commits?author=orzilca "Code") [📖](https://github.com/cortexmg/nightwatch-xhr/commits?author=orzilca "Documentation") [💡](#example-orzilca "Examples") [👀](#review-orzilca "Reviewed Pull Requests") | [<img src="https://framagit.org/uploads/-/system/user/avatar/8497/avatar.png" width="100px;"/><br /><sub><b>Jalil</b></sub>](https://framagit.org/jalil/)<br />[💻](https://github.com/cortexmg/nightwatch-xhr/commits?author=jalil "Code") [📖](https://github.com/cortexmg/nightwatch-xhr/commits?author=jalil "Documentation") [💡](#example-jalil "Examples") [👀](#review-jalil "Reviewed Pull Requests") [⚠️](https://github.com/cortexmg/nightwatch-xhr/commits?author=jalil "Tests") [🔧](#tool-jalil "Tools") | [<img src="https://avatars2.githubusercontent.com/u/12366410?v=4" width="100px;"/><br /><sub><b>Pixel</b></sub>](https://github.com/louis-bompart)<br />[🔧](#tool-louis-bompart "Tools") | [<img src="https://avatars3.githubusercontent.com/u/8048092?v=4" width="100px;"/><br /><sub><b>rdbmax</b></sub>](https://github.com/rdbmax)<br />[🔧](#tool-rdbmax "Tools") [⚠️](https://github.com/cortexmg/nightwatch-xhr/commits?author=rdbmax "Tests") | [<img src="https://avatars2.githubusercontent.com/u/2119706?v=4" width="100px;"/><br /><sub><b>Leonardo Kewitz</b></sub>](https://kewitz.js.org)<br />[💻](https://github.com/cortexmg/nightwatch-xhr/commits?author=kewitz "Code") |
+| :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

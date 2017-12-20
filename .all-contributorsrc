@@ -21,9 +21,9 @@
     },
     {
       "login": "jalil",
-      "name": "jalil",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/45453?v=4",
-      "profile": "https://github.com/jalil",
+      "name": "Jalil",
+      "avatar_url": "https://framagit.org/uploads/-/system/user/avatar/8497/avatar.png",
+      "profile": "https://framagit.org/jalil/",
       "contributions": [
         "code",
         "doc",
@@ -50,6 +50,15 @@
       "contributions": [
         "tool",
         "test"
+      ]
+    },
+    {
+      "login": "kewitz",
+      "name": "Leonardo Kewitz",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/2119706?v=4",
+      "profile": "https://kewitz.js.org",
+      "contributions": [
+        "code"
       ]
     }
   ]
