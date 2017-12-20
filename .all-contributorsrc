@@ -31,6 +31,15 @@
         "review",
         "test"
       ]
+    },
+    {
+      "login": "louis-bompart",
+      "name": "Pixel",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/12366410?v=4",
+      "profile": "https://github.com/louis-bompart",
+      "contributions": [
+        "tool"
+      ]
     }
   ]
 }
