@@ -18,6 +18,19 @@
         "example",
         "review"
       ]
+    },
+    {
+      "login": "jalil",
+      "name": "jalil",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/45453?v=4",
+      "profile": "https://github.com/jalil",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "review",
+        "test"
+      ]
     }
   ]
 }
