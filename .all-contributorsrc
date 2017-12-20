@@ -29,7 +29,8 @@
         "doc",
         "example",
         "review",
-        "test"
+        "test",
+        "tool"
       ]
     },
     {
