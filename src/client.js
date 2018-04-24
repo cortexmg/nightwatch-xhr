@@ -29,7 +29,7 @@ export const clientListen = function () {
                     const xhr = getXhr(this.id);
                     if (xhr) {
                         xhr.httpResponseCode = this.status;
-                        xhr.responseData = this.responseText;
+                        xhr.responseData = this.response;
                         xhr.status = (this.status === 200 ? 'success' : 'error');
                     }
                 }
