@@ -15,6 +15,7 @@ const getFakeXMLHttpRequest = (open, send) => {
         } else {
             this.status = success ? 200 : 404;
             this.responseText = response;
+            this.response = response;
             this.readyState = xhr.DONE;
             this.send(request);
             this.onload();
