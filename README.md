@@ -27,7 +27,7 @@ In order for your project to be able to access these commands and assertions you
 ```
 ...
 "custom_commands_path": ["./node_modules/nightwatch-xhr/src/commands"],
-"custom_assertions_path: ["./node_modules/nightwatch-xhr/src/assertions"],
+"custom_assertions_path": ["./node_modules/nightwatch-xhr/src/assertions"],
 ...
 ```
 
@@ -36,7 +36,7 @@ or, for legacy (ES5) Javascript, use
 ```
 ...
 "custom_commands_path": ["./node_modules/nightwatch-xhr/es5/commands"],
-"custom_assertions_path: ["./node_modules/nightwatch-xhr/es5/assertions"],
+"custom_assertions_path": ["./node_modules/nightwatch-xhr/es5/assertions"],
 ...
 ```
 
