@@ -43,7 +43,7 @@ or, for legacy (ES5) Javascript, use
 ## Commands 
 
 ### waitForXHR
-Calls the `trigger`, waits for a `delay` to complete, and then calls `callback` with an an array of all xhr requests corresponding to the given `urlPattern`. 
+Calls the `trigger`, waits for a `delay` to complete, and then calls `callback` with an array of all xhr requests corresponding to the given `urlPattern`. 
 
 ### waitForFirstXHR
 Calls the `trigger`, and then calls `callback` with the first xhr request corresponding to the given `urlPattern`, failing if `timeout` is exceeded.  
