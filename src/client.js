@@ -31,6 +31,7 @@ export const clientListen = function () {
                         xhr.httpResponseCode = this.status;
                         xhr.responseData = this.response;
                         xhr.status = (this.status === 200 ? 'success' : 'error');
+                        xhr.responseHeaders = this.getAllResponseHeaders();
                     }
                 }
             };
