@@ -24,13 +24,14 @@ export const clientListen = function () {
                 url,
                 openedTime: Date.now(),
             });
-            this.onload = function () {
+            this.onloadend = function () {
                 if (this.readyState === XMLHttpRequest.DONE) {
                     const xhr = getXhr(this.id);
                     if (xhr) {
                         xhr.httpResponseCode = this.status;
                         xhr.responseData = this.response;
                         xhr.status = (this.status === 200 ? 'success' : 'error');
+                        xhr.responseHeaders = this.getAllResponseHeaders();
                     }
                 }
             };

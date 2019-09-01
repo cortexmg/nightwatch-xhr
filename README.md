@@ -27,7 +27,7 @@ In order for your project to be able to access these commands and assertions you
 ```
 ...
 "custom_commands_path": ["./node_modules/nightwatch-xhr/src/commands"],
-"custom_assertions_path: ["./node_modules/nightwatch-xhr/src/assertions"],
+"custom_assertions_path": ["./node_modules/nightwatch-xhr/src/assertions"],
 ...
 ```
 
@@ -36,14 +36,14 @@ or, for legacy (ES5) Javascript, use
 ```
 ...
 "custom_commands_path": ["./node_modules/nightwatch-xhr/es5/commands"],
-"custom_assertions_path: ["./node_modules/nightwatch-xhr/es5/assertions"],
+"custom_assertions_path": ["./node_modules/nightwatch-xhr/es5/assertions"],
 ...
 ```
 
 ## Commands 
 
 ### waitForXHR
-Calls the `trigger`, waits for a `delay` to complete, and then calls `callback` with an an array of all xhr requests corresponding to the given `urlPattern`. 
+Calls the `trigger`, waits for a `delay` to complete, and then calls `callback` with an array of all xhr requests corresponding to the given `urlPattern`. 
 
 ### waitForFirstXHR
 Calls the `trigger`, and then calls `callback` with the first xhr request corresponding to the given `urlPattern`, failing if `timeout` is exceeded.  
