@@ -73,7 +73,7 @@ WaitForXHR.prototype.command = function (
         clearInterval(command.pollingInterval);
         // callback(command.client.api, new Error());
         // his.fail({value:false}, 'not found', this.expectedValue, defaultMsg);
-        command.client.assertion(false, 'Timed out', 'XHR Request', `Timed out waiting for ${urlPattern} XHR !`);
+        api.assert.ok(false, 'Timed out', 'XHR Request', `Timed out waiting for ${urlPattern} XHR !`);
         command.emit('complete');
     }, timeout);
 
