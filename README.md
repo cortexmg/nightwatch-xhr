@@ -1,3 +1,5 @@
+*Please note: This repository is not maintained*
+
 Nightwatch XHR
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors)
 ===
